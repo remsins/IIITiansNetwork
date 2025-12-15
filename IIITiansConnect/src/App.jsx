@@ -8,7 +8,8 @@ function App() {
       .catch(err => console.error('ERROR:', err));
   }, []);
 
-  return <h1>Frontend running</h1>;
+  return 
+  
 }
 
 export default App;
