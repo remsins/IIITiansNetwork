@@ -1,4 +1,4 @@
-# MERN Starter – Full Stack Boilerplate (Beginner Friendly)
+# MERN Starter – Full Stack Boilerplate 
 
 This repository is a **ready-to-use MERN stack starter** with a clean separation of **Backend (Node.js + Express + MongoDB)** and **Frontend (React + Vite)**.
 
@@ -41,38 +41,6 @@ It is designed so that:
 - React
 - Vite
 - JavaScript (ES Modules)
-
----
-
-## 📁 Folder Structure (IMPORTANT)
-
-Mern_Starter/
-│
-├── Backend/
-│   ├── src/
-│   │   ├── db/
-│   │   │   └── index.js        # MongoDB connection logic
-│   │   └── index.js            # Express server entry point
-│   ├── .env.example            # Backend environment variables template
-│   ├── .gitignore
-│   └── package.json
-│
-├── Hab-Track/                  # Frontend (React + Vite)
-│   ├── src/
-│   │   ├── api/
-│   │   │   └── axios.js        # API helper (optional)
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   ├── .env.example            # Frontend environment variables template
-│   ├── .gitignore
-│   ├── index.html
-│   ├── package.json
-│   └── vite.config.js
-│
-└── README.md
-
-
 
 ---
 
