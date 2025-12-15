@@ -1,16 +1,79 @@
-# React + Vite
+# MERN Starter – Full Stack Boilerplate (Beginner Friendly)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is a **ready-to-use MERN stack starter** with a clean separation of **Backend (Node.js + Express + MongoDB)** and **Frontend (React + Vite)**.
 
-Currently, two official plugins are available:
+It is designed so that:
+- You can **reuse it for multiple projects**
+- A **beginner can run it without confusion**
+- Setup is **step-by-step and predictable**
+- Environment variables and secrets are handled correctly
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📦 What This Repo Contains
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Backend
+- Node.js + Express server
+- MongoDB connection using Mongoose
+- Proper async startup (server waits for DB)
+- CORS enabled for frontend communication
+- Environment-based configuration
 
-## Expanding the ESLint configuration
+### Frontend
+- React app using Vite
+- Simple API connectivity setup
+- Environment-based API URL
+- Minimal, clean structure (no styling framework forced)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🧱 Tech Stack
+
+**Backend**
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- dotenv
+- cors
+
+**Frontend**
+- React
+- Vite
+- JavaScript (ES Modules)
+
+---
+
+## 📁 Folder Structure (IMPORTANT)
+
+Mern_Starter/
+├─ Backend/
+│ ├─ src/
+│ │ ├─ db/
+│ │ │ └─ index.js
+│ │ └─ index.js
+│ ├─ .env.example
+│ ├─ .gitignore
+│ └─ package.json
+│
+├─ Hab-Track/ (Frontend)
+│ ├─ src/
+│ │ ├─ api/
+│ │ │ └─ axios.js
+│ │ ├─ App.jsx
+│ │ └─ main.jsx
+│ ├─ .env.example
+│ ├─ .gitignore
+│ └─ package.json
+│
+└─ README.md
+
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/Ankurrr27/Mern_Starter.git
+cd Mern_Starter
