@@ -1,15 +1,18 @@
-import { useEffect } from 'react';
+import Colleges from "./pages/Colleges";
+import Users from "./pages/Users";
+import Clubs from "./pages/Clubs";
+import Events from "./pages/Events";
+import Navigation from "./components/Navigation";
+// import Index from "./pages";
 
 function App() {
-  useEffect(() => {
-    fetch('http://localhost:5000/')
-      .then(res => res.text())
-      .then(data => console.log('BACKEND:', data))
-      .catch(err => console.error('ERROR:', err));
-  }, []);
-
-  return 
-  
+  return (
+    <div>
+      <Navigation/>
+   
+     
+    </div>
+  );
 }
 
 export default App;

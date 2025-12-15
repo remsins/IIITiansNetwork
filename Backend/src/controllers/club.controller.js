@@ -3,6 +3,12 @@ import Club from "../models/Club.model.js";
 // CREATE club
 export const createClub = async (req, res) => {
   try {
+
+    const clubData = {
+      ...req.body,
+      logo: req.file?.path, // 👈 Cloudinary URL
+    };
+
     const club = await Club.create(req.body);
     res.status(201).json(club);
   } catch (error) {

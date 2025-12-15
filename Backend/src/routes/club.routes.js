@@ -1,4 +1,5 @@
 import express from "express";
+import upload from "../middlewares/upload.middleware.js";
 import {
   createClub,
   getClubs,
@@ -7,7 +8,7 @@ import {
 
 const router = express.Router();
 
-router.post("/", createClub);
+router.post("/", upload.single("logo"), createClub);
 router.get("/", getClubs);
 router.get("/:id", getClubById);
 
