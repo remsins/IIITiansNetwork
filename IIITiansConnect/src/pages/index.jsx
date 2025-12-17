@@ -1,17 +1,49 @@
-import BlobWithLogo from "../ui/BlobWithLogo";
+import { useNavigate } from "react-router-dom";
 import Index1 from "../sub-pages/index1";
-import Index2 from "../sub-pages/index2";
+import Index2 from "../sub-pages/index2.0";
+import Index2_2 from "../sub-pages/index2.1";
 import Index3 from "../sub-pages/index3";
 import Index4 from "../sub-pages/index4";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
     <>
-      {/* SUB PAGES AS SECTIONS */}
+      {/* HERO */}
       <Index1 />
+
+      {/* CONTENT SECTIONS */}
       <Index2 />
-      <Index3 />
-      <Index4/>
+      <Index2_2 />
+
+      {/* TEAM PREVIEW */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+
+          <div className="flex items-center justify-between ">
+            <h1 className="pl-8 text-3xl md:text-4xl font-extrabold">
+              Our Team
+            </h1>
+
+            <button
+              onClick={() => navigate("/team")}
+              className="
+                text-indigo-600 text-sm font-semibold
+                hover:underline underline-offset-4 pr-8
+              "
+            >
+              Full team →
+            </button>
+          </div>
+
+          {/* reuse Index3 cleanly */}
+          <Index3 showViewMore={false} />
+        </div>
+      </section>
+
+      {/* FOOTER / FINAL SECTION */}
+      <Index4 />
     </>
   );
 };

@@ -2,8 +2,6 @@ import mongoose from "mongoose";
 
 const collegeSchema = new mongoose.Schema(
   {
-    // MongoDB auto-creates _id
-
     name: {
       type: String,
       required: true,
@@ -11,9 +9,14 @@ const collegeSchema = new mongoose.Schema(
       trim: true,
     },
 
+    // 👇 structured logo object
     logo: {
-      type: String, // URL to logo image
-      required: true,
+      public_id: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
     },
 
     description: {
@@ -26,17 +29,16 @@ const collegeSchema = new mongoose.Schema(
       trim: true,
     },
 
+    // 👇 structured gallery (future-proof)
     gallery: [
       {
-        type: String, // image URLs
+        public_id: String,
+        url: String,
       },
     ],
   },
   {
-    timestamps: {
-      createdAt: true,
-      updatedAt: false, // only createdAt as requested
-    },
+    timestamps: true,
   }
 );
 

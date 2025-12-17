@@ -5,11 +5,9 @@ import cloudinary from "../config/cloudinary.js";
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "iiitians-network",
+    folder: "colleges",
     allowed_formats: ["jpg", "png", "jpeg", "webp"],
   },
 });
 
-const upload = multer({ storage });
-
-export default upload;
+export const upload = multer({ storage });

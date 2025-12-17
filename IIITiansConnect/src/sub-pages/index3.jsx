@@ -1,16 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import BigTeamCard from "../ui/BigTeamCard";
 import SmallTeamCard from "../ui/SmallTeamCard";
-import MiniTeamCard from "../ui/MiniTeamCard";
 
-const index3 = () => {
+const Index3 = ({ showViewMore = false }) => {
+  const navigate = useNavigate();
+
   return (
-    <section className="py-16 bg-white">
+    <section className="py-10 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <h1 className="text-4xl font-extrabold text-center mb-12">Our Team</h1>
+
+        {/* TITLE */}
+        
 
         {/* PRESIDENT + VP */}
-        <div className="grid grid-cols-2 gap-10 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-14">
           <BigTeamCard
             name="Srishti Singh"
             role="President"
@@ -30,7 +34,6 @@ const index3 = () => {
             name="Lokesh"
             role="Vice President"
             college="IIIT-Kalyani"
-
             image="/lokesh.png"
             desc="Oversees internal operations and coordination across IIITs, ensuring smooth execution of initiatives and effective communication between teams."
             links={{
@@ -43,15 +46,13 @@ const index3 = () => {
         </div>
 
         {/* LEADS */}
-
-        <div className="grid grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <SmallTeamCard
             name="Ankur Singh"
             role="Social Media Lead"
             college="IIIT-Kota"
-
             image="/team/ankur.jpg"
-            desc="Manages social media strategy, content planning, and outreach to strengthen the IIITians Network presence across platforms."
+            desc="Manages social media strategy, content planning, and outreach."
             links={{
               linkedin: "https://linkedin.com/in/ankur",
               instagram: "https://instagram.com/ankur",
@@ -62,11 +63,10 @@ const index3 = () => {
 
           <SmallTeamCard
             name="Mahak Gupta"
-            role="Content Team"
+            role="Content Team Lead"
             college="IIIT-Kota"
-
-            image="/team/dummypfp.png"
-            desc="Researches topics relevant to IIIT students, prepares informative articles and announcements, and ensures all published content is accurate, structured, and student-focused."
+            image="/team/mahak.jpeg"
+            desc="Researches topics, prepares articles, and ensures content quality."
             links={{
               linkedin: "https://linkedin.com/in/ankur",
               instagram: "https://instagram.com/ankur",
@@ -77,11 +77,10 @@ const index3 = () => {
 
           <SmallTeamCard
             name="Sankalp Joshi"
-            role="Design Team"
+            role="Design Team Lead"
             college="IIIT-Allahabad"
-
-            image="/team/dummypfp.png"
-            desc="Responsible for visual design, branding assets, and ensuring a clean, user-friendly interface."
+            image="/team/sankalp.png"
+            desc="Handles branding, visual identity, and UI consistency."
             links={{
               linkedin: "https://linkedin.com/in/ankur",
               instagram: "https://instagram.com/ankur",
@@ -91,95 +90,23 @@ const index3 = () => {
           />
         </div>
 
-        {/* MEMBERS */}
-        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-          <div className="flex gap-3 overflow-x-auto pb-2">
-            <MiniTeamCard
-              name="Aman Gupta"
-              team="Content"
-              college="IIIT Kota"
-              image="/team/dummypfp.png"
-            />
-
-            <MiniTeamCard
-              name="Neha Sharma"
-              team="Design"
-              college="IIIT Gwalior"
-              image="/team/dummypfp.png"
-            />
-
-            <MiniTeamCard
-              name="Rahul Verma"
-              team="Tech"
-              college="IIIT Guwahati"
-              image="/team/dummypfp.png"
-            />
-
-            <MiniTeamCard
-              name="Priya Singh"
-              team="Social"
-              college="IIIT Pune"
-              image="/team/dummypfp.png"
-            />
-              <MiniTeamCard
-              name="Aman Gupta"
-              team="Content"
-              college="IIIT Kota"
-              image="/team/dummypfp.png"
-            />
-
-            <MiniTeamCard
-              name="Neha Sharma"
-              team="Design"
-              college="IIIT Gwalior"
-              image="/team/dummypfp.png"
-            />
-
-            <MiniTeamCard
-              name="Rahul Verma"
-              team="Tech"
-              college="IIIT Guwahati"
-              image="/team/dummypfp.png"
-            />
-
-            <MiniTeamCard
-              name="Priya Singh"
-              team="Social"
-              college="IIIT Pune"
-              image="/team/dummypfp.png"
-            />
-              <MiniTeamCard
-              name="Aman Gupta"
-              team="Content"
-              college="IIIT Kota"
-              image="/team/dummypfp.png"
-            />
-
-            <MiniTeamCard
-              name="Neha Sharma"
-              team="Design"
-              college="IIIT Gwalior"
-              image="/team/dummypfp.png"
-            />
-
-            <MiniTeamCard
-              name="Rahul Verma"
-              team="Tech"
-              college="IIIT Guwahati"
-              image="/team/dummypfp.png"
-            />
-
-            <MiniTeamCard
-              name="Priya Singh"
-              team="Social"
-              college="IIIT Pune"
-              image="/team/dummypfp.png"
-            />
+        {/* VIEW MORE (HOME ONLY) */}
+        {showViewMore && (
+          <div className="flex justify-end mt-8">
+            <button
+              onClick={() => navigate("/team")}
+              className="
+                text-indigo-600 text-sm font-semibold
+                hover:underline underline-offset-4
+              "
+            >
+              See more →
+            </button>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
 };
 
-export default index3;
+export default Index3;

@@ -13,7 +13,7 @@ const Navigation = () => {
     { name: "Home", href: "#home" },
     { name: "JEE Counselling", href: "#jee-counselling" },
     { name: "IIIT Placements", href: "#iiit-placements" },
-    { name: "Our Team", href: "#team" },
+    { name: "Our Team", href: "/team" },
     { name: "Contact", href: "#contact" },
   ];
 

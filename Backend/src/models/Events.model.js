@@ -2,8 +2,6 @@ import mongoose from "mongoose";
 
 const eventSchema = new mongoose.Schema(
   {
-    // MongoDB auto-creates _id
-
     title: {
       type: String,
       required: true,
@@ -20,16 +18,27 @@ const eventSchema = new mongoose.Schema(
       required: true,
     },
 
-    collegeId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "College",
+    collegeName: {
+      type: String,
       required: true,
+      trim: true,
     },
 
-    clubId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Club",
-      required: true,
+    clubName: {
+      type: String,
+      trim: true,
+    },
+
+    // 🔗 EVENT LINK (NEW)
+    link: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    banner: {
+      public_id: String,
+      url: String,
     },
 
     registrations: [
@@ -42,7 +51,7 @@ const eventSchema = new mongoose.Schema(
   {
     timestamps: {
       createdAt: true,
-      updatedAt: false, // only createdAt as requested
+      updatedAt: false,
     },
   }
 );

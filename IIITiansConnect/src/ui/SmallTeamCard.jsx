@@ -18,7 +18,7 @@ const SmallTeamCard = ({ name, role, college, image, desc, links = {} }) => {
           <img
             src={image}
             alt={name}
-            className="w-full object-contain"
+            className=" h-full  object-contain"
           />
         </div>
 
