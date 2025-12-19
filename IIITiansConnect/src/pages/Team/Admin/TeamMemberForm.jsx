@@ -5,7 +5,7 @@ export default function TeamMemberForm({ onSuccess }) {
   const [form, setForm] = useState({
     name: "",
     role: "",
-    roleType: "", // 🔥 REQUIRED
+    roleType: "",
     iiit: "",
     team: "Tech",
     year: "2025-26",
@@ -25,20 +25,13 @@ export default function TeamMemberForm({ onSuccess }) {
     setLoading(true);
 
     const formData = new FormData();
-
-    Object.entries(form).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-
-    if (photo) {
-      formData.append("photo", photo); // must match multer field
-    }
+    Object.entries(form).forEach(([k, v]) => formData.append(k, v));
+    if (photo) formData.append("photo", photo);
 
     try {
       await api.post("/team", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-
       setForm({
         name: "",
         role: "",
@@ -52,7 +45,6 @@ export default function TeamMemberForm({ onSuccess }) {
       setPhoto(null);
       onSuccess();
     } catch (err) {
-      console.error(err);
       alert(err.response?.data?.error || "Failed to add team member");
     } finally {
       setLoading(false);
@@ -62,11 +54,16 @@ export default function TeamMemberForm({ onSuccess }) {
   return (
     <form
       onSubmit={submit}
-      className="bg-white border rounded-xl px-6 pb-6 pt-3 space-y-3"
+      className="
+        bg-white border rounded-xl
+        p-4 sm:p-6
+        max-w-3xl mx-auto
+        space-y-4
+      "
     >
       <h2 className="text-lg font-semibold">Add Team Member</h2>
 
-      {/* 🔥 ROLE CATEGORY (IMPORTANT) */}
+      {/* ROLE TYPE */}
       <select
         name="roleType"
         value={form.roleType}
@@ -80,20 +77,22 @@ export default function TeamMemberForm({ onSuccess }) {
         <option value="MEMBER">Team Member</option>
       </select>
 
-      {/* BASIC FIELDS */}
-      {["name", "role", "iiit", "email", "linkedin"].map((key) => (
-        <input
-          key={key}
-          name={key}
-          value={form[key]}
-          onChange={handleChange}
-          placeholder={key.toUpperCase()}
-          className="w-full border px-3 py-2 rounded"
-          required={key !== "linkedin"}
-        />
-      ))}
+      {/* MAIN FIELDS */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {["name", "role", "iiit", "email", "linkedin"].map((key) => (
+          <input
+            key={key}
+            name={key}
+            value={form[key]}
+            onChange={handleChange}
+            placeholder={key.toUpperCase()}
+            className="w-full border px-3 py-2 rounded"
+            required={key !== "linkedin"}
+          />
+        ))}
+      </div>
 
-      {/* PHOTO UPLOAD */}
+      {/* PHOTO */}
       <input
         type="file"
         accept="image/*"
@@ -103,7 +102,7 @@ export default function TeamMemberForm({ onSuccess }) {
       />
 
       {/* TEAM + YEAR */}
-      <div className="flex gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <select
           name="team"
           value={form.team}
@@ -127,7 +126,11 @@ export default function TeamMemberForm({ onSuccess }) {
 
       <button
         disabled={loading}
-        className="bg-indigo-600 text-white px-4 py-2 rounded"
+        className="
+          bg-indigo-600 text-white
+          px-4 py-2 rounded
+          w-full sm:w-fit
+        "
       >
         {loading ? "Uploading..." : "Add Member"}
       </button>
