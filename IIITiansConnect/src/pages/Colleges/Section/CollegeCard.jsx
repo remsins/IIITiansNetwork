@@ -9,6 +9,9 @@ const CollegeCard = ({ college, onUpdated }) => {
   const [logoFile, setLogoFile] = useState(null);
   const [loadingLogo, setLoadingLogo] = useState(false);
 
+  // ✅ AUTH CHECK (ADMIN ONLY)
+  const isAdminLoggedIn = Boolean(localStorage.getItem("adminToken"));
+
   const [form, setForm] = useState({
     description: description || "",
     website: website || "",
@@ -22,7 +25,7 @@ const CollegeCard = ({ college, onUpdated }) => {
      UPLOAD LOGO
   ========================= */
   const handleLogoUpload = async () => {
-    if (!logoFile) return;
+    if (!logoFile || !isAdminLoggedIn) return;
 
     const formData = new FormData();
     formData.append("logo", logoFile);
@@ -48,6 +51,8 @@ const CollegeCard = ({ college, onUpdated }) => {
      SAVE TEXT
   ========================= */
   const handleSave = async () => {
+    if (!isAdminLoggedIn) return;
+
     try {
       const res = await api.patch(`/colleges/${_id}`, form);
       onUpdated(res.data);
@@ -85,7 +90,8 @@ const CollegeCard = ({ college, onUpdated }) => {
           "
         />
 
-        {isEditing && (
+        {/* LOGO UPLOAD (ADMIN ONLY) */}
+        {isEditing && isAdminLoggedIn && (
           <>
             <input
               type="file"
@@ -112,12 +118,12 @@ const CollegeCard = ({ college, onUpdated }) => {
       </div>
 
       {/* NAME */}
-      <h3 className=" text-sm sm:text-lg font-semibold text-gray-900 mb-2">
+      <h3 className="text-sm sm:text-lg font-semibold text-gray-900 mb-2">
         {name}
       </h3>
 
       {/* DESCRIPTION */}
-      {isEditing ? (
+      {isEditing && isAdminLoggedIn ? (
         <textarea
           name="description"
           value={form.description}
@@ -137,7 +143,7 @@ const CollegeCard = ({ college, onUpdated }) => {
       )}
 
       {/* WEBSITE */}
-      {isEditing ? (
+      {isEditing && isAdminLoggedIn ? (
         <input
           name="website"
           value={form.website}
@@ -165,52 +171,54 @@ const CollegeCard = ({ college, onUpdated }) => {
         )
       )}
 
-      {/* ACTIONS */}
-      <div className="mt-auto flex gap-2 pt-2">
-        {isEditing ? (
-          <>
-            <button
-              onClick={handleSave}
-              className="
-                flex items-center gap-1 text-sm
-                bg-green-600 text-white px-3 py-1 rounded
-                hover:bg-green-700 transition
-              "
-            >
-              <Save size={14} /> Save
-            </button>
+      {/* ACTIONS (ADMIN ONLY) */}
+      {isAdminLoggedIn && (
+        <div className="mt-auto flex gap-2 pt-2">
+          {isEditing ? (
+            <>
+              <button
+                onClick={handleSave}
+                className="
+                  flex items-center gap-1 text-sm
+                  bg-green-600 text-white px-3 py-1 rounded
+                  hover:bg-green-700 transition
+                "
+              >
+                <Save size={14} /> Save
+              </button>
 
+              <button
+                onClick={() => {
+                  setIsEditing(false);
+                  setLogoFile(null);
+                  setForm({
+                    description: description || "",
+                    website: website || "",
+                  });
+                }}
+                className="
+                  flex items-center gap-1 text-sm
+                  bg-gray-200 px-3 py-1 rounded
+                  hover:bg-gray-300 transition
+                "
+              >
+                <X size={14} /> Cancel
+              </button>
+            </>
+          ) : (
             <button
-              onClick={() => {
-                setIsEditing(false);
-                setLogoFile(null);
-                setForm({
-                  description: description || "",
-                  website: website || "",
-                });
-              }}
+              onClick={() => setIsEditing(true)}
               className="
                 flex items-center gap-1 text-sm
-                bg-gray-200 px-3 py-1 rounded
-                hover:bg-gray-300 transition
+                bg-indigo-600 text-white px-3 py-1 rounded
+                hover:bg-indigo-700 transition
               "
             >
-              <X size={14} /> Cancel
+              <Pencil size={14} /> Edit
             </button>
-          </>
-        ) : (
-          <button
-            onClick={() => setIsEditing(true)}
-            className="
-              flex items-center gap-1 text-sm
-              bg-indigo-600 text-white px-3 py-1 rounded
-              hover:bg-indigo-700 transition
-            "
-          >
-            <Pencil size={14} /> Edit
-          </button>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,33 +1,29 @@
 import Event from "../models/Events.model.js";
 import cloudinary from "../config/cloudinary.js";
 
-// CREATE event
-// import Event from "../models/Events.model.js";
-
+/* =========================
+   CREATE EVENT
+========================= */
 export const createEvent = async (req, res) => {
   try {
-    if (!req.body) {
-      return res.status(400).json({ message: "Request body missing" });
-    }
     const {
       title,
-      description,
+      description = "",
       date,
       collegeName,
-      clubName,
-      link // ✅ optional
+      clubName = "",
+      link = "",
     } = req.body;
 
-    // ✅ validate ONLY required fields
     if (!title || !date || !collegeName) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    let bannerData = {};
+    let banner = null;
 
     if (req.file) {
-      bannerData = {
-        public_id: req.file.public_id,
+      banner = {
+        public_id: req.file.filename,
         url: req.file.path,
       };
     }
@@ -37,72 +33,74 @@ export const createEvent = async (req, res) => {
       description,
       date,
       collegeName,
-      clubName: clubName || "",
-      link, // ✅ safe default
-      banner: bannerData,
+      clubName,
+      link,
+      banner,
     });
 
     res.status(201).json(event);
-  } catch (error) {
-    console.error("CREATE EVENT ERROR:", error);
-    res.status(500).json({ message: error.message });
+  } catch (err) {
+    console.error("CREATE EVENT ERROR:", err);
+    res.status(500).json({ message: err.message });
   }
 };
 
-
-// GET all events
+/* =========================
+   GET ALL EVENTS
+========================= */
 export const getEvents = async (req, res) => {
   try {
-    const events = await Event.find()
-      .populate("registrations", "name email")
-      .sort({ createdAt: -1 });
-
+    const events = await Event.find().sort({ createdAt: -1 });
     res.json(events);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  } catch (err) {
+    console.error("GET EVENTS ERROR:", err);
+    res.status(500).json({ message: err.message });
   }
 };
 
-// GET event by ID
+/* =========================
+   GET EVENT BY ID
+========================= */
 export const getEventById = async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id)
-      .populate("registrations", "name email");
+    const event = await Event.findById(req.params.id);
 
     if (!event) {
       return res.status(404).json({ message: "Event not found" });
     }
 
     res.json(event);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  } catch (err) {
+    console.error("GET EVENT BY ID ERROR:", err);
+    res.status(500).json({ message: err.message });
   }
 };
 
-
+/* =========================
+   UPDATE EVENT
+========================= */
 export const updateEvent = async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      date,
-      collegeName,
-      clubName,
-      link,
-    } = req.body;
+    const updateData = {};
 
-    let updateData = {
-      title,
-      description,
-      date,
-      collegeName,
-      clubName,
-      link,
-    };
+    const allowedFields = [
+      "title",
+      "description",
+      "date",
+      "collegeName",
+      "clubName",
+      "link",
+    ];
+
+    allowedFields.forEach((field) => {
+      if (req.body[field] !== undefined) {
+        updateData[field] = req.body[field];
+      }
+    });
 
     if (req.file) {
       updateData.banner = {
-        public_id: req.file.public_id,
+        public_id: req.file.filename,
         url: req.file.path,
       };
     }
@@ -118,16 +116,15 @@ export const updateEvent = async (req, res) => {
     }
 
     res.json(event);
-  } catch (error) {
-    console.error("UPDATE EVENT ERROR:", error);
-    res.status(500).json({ message: error.message });
+  } catch (err) {
+    console.error("UPDATE EVENT ERROR:", err);
+    res.status(500).json({ message: err.message });
   }
 };
 
-
-// import Event from "../models/Events.model.js";
-
-
+/* =========================
+   DELETE EVENT
+========================= */
 export const deleteEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -136,25 +133,18 @@ export const deleteEvent = async (req, res) => {
       return res.status(404).json({ message: "Event not found" });
     }
 
-    // 🔒 NEVER allow Cloudinary failure to crash delete
     if (event.banner?.public_id) {
       try {
         await cloudinary.uploader.destroy(event.banner.public_id);
-      } catch (cloudErr) {
-        console.error(
-          "CLOUDINARY DELETE FAILED:",
-          event.banner.public_id,
-          cloudErr.message
-        );
+      } catch (err) {
+        console.error("CLOUDINARY DELETE FAILED:", err.message);
       }
     }
 
-    await Event.findByIdAndDelete(req.params.id);
-
+    await event.deleteOne();
     res.json({ message: "Event deleted successfully" });
-  } catch (error) {
-    console.error("DELETE EVENT ERROR:", error);
+  } catch (err) {
+    console.error("DELETE EVENT ERROR:", err);
     res.status(500).json({ message: "Failed to delete event" });
   }
 };
-

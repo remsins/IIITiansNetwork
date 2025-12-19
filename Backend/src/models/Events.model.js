@@ -10,6 +10,7 @@ const eventSchema = new mongoose.Schema(
 
     description: {
       type: String,
+      default: "",
       trim: true,
     },
 
@@ -26,33 +27,23 @@ const eventSchema = new mongoose.Schema(
 
     clubName: {
       type: String,
+      default: "",
       trim: true,
     },
 
-    // 🔗 EVENT LINK (NEW)
     link: {
       type: String,
-      trim: true,
       default: "",
+      trim: true,
     },
 
     banner: {
       public_id: String,
       url: String,
     },
-
-    registrations: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
   },
   {
-    timestamps: {
-      createdAt: true,
-      updatedAt: false,
-    },
+    timestamps: true,
   }
 );
 

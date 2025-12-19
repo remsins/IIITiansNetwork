@@ -1,4 +1,4 @@
-import EventCard from "../../../ui/EventCard";
+import EventCard from "./EventCard";
 
 export default function EventsGrid({
   loading,

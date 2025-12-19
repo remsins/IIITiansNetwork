@@ -4,17 +4,22 @@ export default function EventsFilters({
   sortBy,
   setSortBy,
   onCreate,
+  hideCreate = false, // 👈 NEW
 }) {
   return (
-    <div className="
-      flex flex-col gap-2 sm:gap-4 mb-10
-      md:flex-row md:items-center md:justify-between
-    ">
+    <div
+      className="
+        flex flex-col gap-2 sm:gap-4 mb-10
+        md:flex-row md:items-center md:justify-between
+      "
+    >
       {/* Filters */}
-      <div className="
-        flex flex-col gap-3
-        sm:flex-row sm:flex-wrap
-      ">
+      <div
+        className="
+          flex flex-col gap-3
+          sm:flex-row sm:flex-wrap
+        "
+      >
         <input
           type="text"
           placeholder="Search events, college, club..."
@@ -43,18 +48,20 @@ export default function EventsFilters({
         </select>
       </div>
 
-      {/* CTA */}
-      <button
-        onClick={onCreate}
-        className="
-          w-full md:w-auto
-          bg-indigo-600 text-white
-          px-4 py-2 rounded-lg
-          hover:bg-indigo-700 transition
-        "
-      >
-        Create Event
-      </button>
+      {/* CTA (ADMIN ONLY) */}
+      {!hideCreate && (
+        <button
+          onClick={onCreate}
+          className="
+            w-full md:w-auto
+            bg-indigo-600 text-white
+            px-4 py-2 rounded-lg
+            hover:bg-indigo-700 transition
+          "
+        >
+          Create Event
+        </button>
+      )}
     </div>
   );
 }

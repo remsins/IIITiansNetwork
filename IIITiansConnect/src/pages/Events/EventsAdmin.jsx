@@ -1,13 +1,17 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import api from "../../api/axios";
 
-import EventsGrid from "./Sections/EventsGrid";
 import EventsHeader from "./Sections/EventsHeader";
 import EventsFilters from "./Sections/EventsFilters";
+import EventsGrid from "./Sections/EventsGrid";
+import AddEventForm from "./Sections/AddEventForm";
 
-export default function PublicEvents() {
+export default function EventsPage() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [showForm, setShowForm] = useState(false);
+  const [editingEvent, setEditingEvent] = useState(null);
 
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("newest");
@@ -16,9 +20,31 @@ export default function PublicEvents() {
     api
       .get("/events")
       .then((res) => setEvents(res.data))
-      .catch((err) => console.error("PUBLIC EVENTS ERROR:", err))
+      .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
+
+  const handleSuccess = (event) => {
+    setEvents((prev) => {
+      const exists = prev.find((e) => e._id === event._id);
+      return exists
+        ? prev.map((e) => (e._id === event._id ? event : e))
+        : [event, ...prev];
+    });
+    setEditingEvent(null);
+    setShowForm(false);
+  };
+
+  const handleEdit = (event) => {
+    setEditingEvent(event);
+    setShowForm(true);
+  };
+
+  const handleDelete = (id) => {
+    setEvents((prev) => prev.filter((e) => e._id !== id));
+    setEditingEvent(null);
+    setShowForm(false);
+  };
 
   // 🔍 FILTER + SORT
   const processedEvents = useMemo(() => {
@@ -35,7 +61,7 @@ export default function PublicEvents() {
         if (sortBy === "az") return a.title.localeCompare(b.title);
         if (sortBy === "za") return b.title.localeCompare(a.title);
         if (sortBy === "oldest") return new Date(a.date) - new Date(b.date);
-        return new Date(b.date) - new Date(a.date);
+        return new Date(b.date) - new Date(a.date); // newest
       });
   }, [events, search, sortBy]);
 
@@ -49,13 +75,29 @@ export default function PublicEvents() {
           setSearch={setSearch}
           sortBy={sortBy}
           setSortBy={setSortBy}
-          hideCreate // 👈 important (explained below)
+          onCreate={() => {
+            setEditingEvent(null);
+            setShowForm(true);
+          }}
         />
+
+        {showForm && (
+          <AddEventForm
+            editingEvent={editingEvent}
+            onSuccess={handleSuccess}
+            onDelete={handleDelete}
+            onCancel={() => {
+              setEditingEvent(null);
+              setShowForm(false);
+            }}
+          />
+        )}
 
         <EventsGrid
           loading={loading}
           events={processedEvents}
-          isPublic // 👈 important
+          onEdit={handleEdit}
+          onDelete={handleDelete}
         />
       </div>
     </section>

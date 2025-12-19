@@ -11,6 +11,9 @@ const Navigation = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // 🔐 Admin auth state
+  const isAdminLoggedIn = !!localStorage.getItem("adminToken");
+
   const navItems = [
     { name: "Home", href: "#home" },
     { name: "Colleges", href: "/colleges" },
@@ -34,9 +37,13 @@ const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       const hero = document.getElementById("hero");
-      if (!hero) return setIsScrolled(window.scrollY > 10);
+      if (!hero) {
+        setIsScrolled(window.scrollY > 10);
+        return;
+      }
       setIsScrolled(hero.getBoundingClientRect().bottom <= 80);
     };
+
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -53,11 +60,19 @@ const Navigation = () => {
       }
       const el = document.getElementById(href.slice(1));
       if (el) {
-        window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
+        window.scrollTo({
+          top: el.offsetTop - 80,
+          behavior: "smooth",
+        });
       }
     } else {
       navigate(href);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("adminToken");
+    navigate("/", { replace: true });
   };
 
   return (
@@ -71,10 +86,12 @@ const Navigation = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          {/* LOGO */}
           <a href="/" className="flex items-center gap-3">
             <img
               src={isScrolled ? logoBlue : logoLight}
               className="w-14 h-auto"
+              alt="IIITians Network"
             />
             <span
               className={`hidden sm:inline font-semibold ${
@@ -85,8 +102,8 @@ const Navigation = () => {
             </span>
           </a>
 
-          {/* Desktop */}
-          <div className="hidden md:flex gap-6">
+          {/* DESKTOP NAV */}
+          <div className="hidden md:flex gap-6 items-center">
             {navItems.map((item) => (
               <a
                 key={item.name}
@@ -99,9 +116,30 @@ const Navigation = () => {
                 {item.name}
               </a>
             ))}
+
+            {/* ADMIN LOGIN / LOGOUT */}
+            {isAdminLoggedIn ? (
+              <button
+                onClick={handleLogout}
+                className={`text-sm font-medium ${
+                  isScrolled ? "text-red-600" : "text-white"
+                }`}
+              >
+                Logout
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate("/admin")}
+                className={`text-sm font-medium ${
+                  isScrolled ? "text-indigo-600" : "text-white"
+                }`}
+              >
+                Admin Login
+              </button>
+            )}
           </div>
 
-          {/* Mobile Toggle */}
+          {/* MOBILE TOGGLE */}
           <button
             onClick={() => setIsOpen(true)}
             className="md:hidden"
@@ -123,10 +161,10 @@ const Navigation = () => {
         />
       )}
 
-      {/* SIDEBAR */}
+      {/* MOBILE SIDEBAR */}
       <aside
         className={`
-          fixed top-0 right-0 h-full w-42 bg-white z-50
+          fixed top-0 right-0 h-full w-44 bg-white z-50
           transform transition-transform duration-300
           ${isOpen ? "translate-x-0" : "translate-x-full"}
         `}
@@ -149,6 +187,26 @@ const Navigation = () => {
               {item.name}
             </a>
           ))}
+
+          {/* ADMIN LOGIN / LOGOUT (MOBILE) */}
+          {isAdminLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="mt-4 px-4 py-3 rounded-lg text-red-600 font-medium hover:bg-red-50 text-left"
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                navigate("/admin");
+              }}
+              className="mt-4 px-4 py-3 rounded-lg text-indigo-600 font-medium hover:bg-indigo-50 text-left"
+            >
+              Admin Login
+            </button>
+          )}
         </div>
       </aside>
     </>

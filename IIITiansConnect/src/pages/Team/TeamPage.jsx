@@ -92,7 +92,7 @@ export default function TeamPage() {
       </section>
 
       {/* ROLE FILTER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 mb-10 sm:mb-12">
+      <section className="max-w-7xl mx-auto  px-4 sm:px-6 mb-10 sm:mb-12">
         <div className="flex flex-wrap gap-2 sm:gap-3">
           {[
             { label: "All", value: "ALL" },
