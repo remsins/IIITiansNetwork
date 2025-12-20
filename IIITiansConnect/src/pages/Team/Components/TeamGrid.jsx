@@ -1,6 +1,6 @@
-import ExecCard from "./cards/ExecCard";
-import LeadCard from "./cards/LeadCard";
-import MemberCard from "./cards/MemberCard";
+import ExecCard from "./Cards/ExecCard";
+import LeadCard from "./Cards/LeadCard";
+import MemberCard from "./Cards/MemberCard";
 
 export default function TeamGrid({ members = [] }) {
   const execs = members
