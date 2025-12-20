@@ -1,5 +1,5 @@
 import Placement from "../models/placement.model.js";
-import College from "../models/college.model.js";
+import College from "../models/College.model.js";
 
 /**
  * Create placement doc for a college (ONCE)
