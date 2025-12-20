@@ -1,4 +1,4 @@
-import College from "../models/college.model.js";
+import College from "../models/College.model.js";
 import cloudinary from "../config/cloudinary.js";
 
 /* =========================
