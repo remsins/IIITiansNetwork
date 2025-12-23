@@ -16,6 +16,7 @@ const [freeCrop, setFreeCrop] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [logoFile, setLogoFile] = useState(null);
   const [loadingLogo, setLoadingLogo] = useState(false);
+  
 
   // ✅ AUTH CHECK (ADMIN ONLY)
   const isAdminLoggedIn = Boolean(localStorage.getItem("adminToken"));
@@ -119,7 +120,7 @@ const [freeCrop, setFreeCrop] = useState(false);
       <div
         className="
     relative h-40
-    bg-gray-100
+    bg-white
     overflow-hidden
     mb-4
     rounded-t-lg
@@ -324,7 +325,7 @@ const [freeCrop, setFreeCrop] = useState(false);
           onClick={() => setFreeCrop((v) => !v)}
           className="text-xs text-indigo-600 hover:underline"
         >
-          {freeCrop ? "Lock to banner ratio (3:2)" : "Free crop"}
+          {freeCrop ? "Lock to banner ratio" : "Free crop"}
         </button>
 
         {/* ACTIONS */}
