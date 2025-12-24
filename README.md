@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MERN Starter – Full Stack Boilerplate (Beginner Friendly)
 
 This repository is a **ready-to-use MERN stack starter** with a clean separation of **Backend (Node.js + Express + MongoDB)** and **Frontend (React + Vite)**.
@@ -50,3 +51,6 @@ It is designed so that:
 ```bash
 git clone https://github.com/Ankurrr27/Mern_Starter.git
 cd Mern_Starterthis graph or flow chart when showen in readme for it dot look good so make that file also in reamde 
+=======
+# IIITiansNetwork
+>>>>>>> 3b835c1a7dec9a7b4e80909816c646bb08da7512
