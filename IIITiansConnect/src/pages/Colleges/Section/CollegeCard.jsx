@@ -119,7 +119,7 @@ const [freeCrop, setFreeCrop] = useState(false);
       {/* LOGO */}
       <div
         className="
-    relative h-45
+    relative h-35
     bg-white
     overflow-hidden
     mb-4
@@ -310,7 +310,7 @@ const [freeCrop, setFreeCrop] = useState(false);
           image={cropSrc}
           crop={crop}
           zoom={zoom}
-          aspect={freeCrop ? undefined : 13 / 8} // 🔥 match banner ratio
+          aspect={freeCrop ? undefined : 5 / 3} // 🔥 match banner ratio
           restrictPosition={false}
           onCropChange={setCrop}
           onZoomChange={setZoom}

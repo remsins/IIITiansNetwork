@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import {
   Instagram,
   Linkedin,
-  Github,
-  Twitter,
   Globe,
+  MessageCircle,
 } from "lucide-react";
+
 
 import Initiatives from "./Initiatives";
 
@@ -46,9 +46,9 @@ export default function Index2() {
               <br />
               <br />
               Founded in January 2020 by students from IIIT Kota, IIIT Guwahati,
-              and IIIT Gwalior, the initiative was built to solve a real problem:
-              the lack of a unified, transparent, and student-first platform for
-              IIITs.
+              and IIIT Gwalior, the initiative was built to solve a real
+              problem: the lack of a unified, transparent, and student-first
+              platform for IIITs.
               <br />
               <br />
               Over the years, IIITians Network has evolved into a nationwide
@@ -73,29 +73,35 @@ export default function Index2() {
 
               <div className="flex flex-wrap gap-3 sm:gap-4">
                 <Social
-                  href="https://www.instagram.com/iiitians.network"
+                  href="https://www.instagram.com/iiitiansnetwork?igsh=MW4wY2d1Z211aGF2NA=="
                   label="Instagram"
                 >
                   <Instagram size={16} />
                 </Social>
 
                 <Social
-                  href="https://www.linkedin.com/company/iiitians-network"
+                  href="https://www.linkedin.com/company/iiitians-network/"
                   label="LinkedIn"
                 >
                   <Linkedin size={16} />
                 </Social>
 
-                <Social
-                  href="https://github.com/iiitians-network"
-                  label="GitHub"
-                >
-                  <Github size={16} />
-                </Social>
+               
 
-            
+<Social
+  href="https://www.reddit.com/r/iiitiansnetwork_/s/raoRbgEdX6"
+  label="Reddit"
+>
+  <Globe size={16} />
+</Social>
 
-                
+<Social
+  href="https://discord.gg/88AnpuNc6E"
+  label="Discord"
+>
+  <MessageCircle size={16} />
+</Social>
+
               </div>
             </div>
           </div>

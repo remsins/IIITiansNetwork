@@ -63,7 +63,7 @@ const Index3 = () => {
             name="Prashant Katiyar"
             role="Former CEO"
             college="IIIT Guwahati"
-            image="/team/dummypfp.png"
+            image="/Founders/3rd.jpeg"
             desc="Contributed to strategy, operations, and scaling the initiative across multiple IIIT campuses."
             links={{
               linkedin: "https://www.linkedin.com/in/prashant-milan-katiyar/",

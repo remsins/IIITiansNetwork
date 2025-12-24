@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
-import { Linkedin, Instagram, Twitter, Github, Globe } from "lucide-react";
+import {
+  Instagram,
+  Linkedin,
+  MessageCircle,
+  Globe,
+} from "lucide-react";
+
 
 const Footer = () => {
   return (
@@ -28,10 +34,10 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/" className="hover:text-white">Home</Link></li>
-              <li><Link to="/placements" className="hover:text-white">Placements</Link></li>
-              <li><Link to="/news-events" className="hover:text-white">News & Events</Link></li>
-              <li><Link to="/competitions-hackathons" className="hover:text-white">Hackathons</Link></li>
-              <li><Link to="/alumni-achievements" className="hover:text-white">Alumni</Link></li>
+              <li><Link to="/placement" className="hover:text-white">Placements</Link></li>
+              <li><Link to="/events" className="hover:text-white">News & Events</Link></li>
+              <li><Link to="/events" className="hover:text-white">Hackathons</Link></li>
+              <li><Link to="/alumni" className="hover:text-white">Alumni</Link></li>
             </ul>
           </div>
 
@@ -40,9 +46,9 @@ const Footer = () => {
             <h4 className="text-sm font-semibold text-white mb-4">Support</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/jee-counselling" className="hover:text-white">JEE Counselling</Link></li>
-              <li><Link to="/about" className="hover:text-white">About Us</Link></li>
+              <li><Link to="/team" className="hover:text-white">About Us</Link></li>
               <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
-              <li><Link to="/privacy-policy" className="hover:text-white">Privacy Policy</Link></li>
+              <li><Link to="/" className="hover:text-white">Privacy Policy</Link></li>
             </ul>
           </div>
 
@@ -52,23 +58,83 @@ const Footer = () => {
               Connect With Us
             </h4>
             <div className="flex gap-4 text-slate-400">
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-white"><Linkedin size={18} /></a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-white"><Instagram size={18} /></a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-white"><Twitter size={18} /></a>
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-white"><Github size={18} /></a>
-              <a href="https://iiitians.network" target="_blank" rel="noreferrer" className="hover:text-white"><Globe size={18} /></a>
-            </div>
+  <a
+    href="https://www.linkedin.com/company/iiitians-network/"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    <Linkedin size={18} />
+  </a>
+
+  <a
+    href="https://www.instagram.com/iiitiansnetwork?igsh=MW4wY2d1Z211aGF2NA=="
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    <Instagram size={18} />
+  </a>
+
+  <a
+    href="https://discord.gg/88AnpuNc6E"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    <MessageCircle size={18} />
+  </a>
+
+  <a
+    href="https://www.reddit.com/r/iiitiansnetwork_/s/raoRbgEdX6"
+    target="_blank"
+    rel="noreferrer"
+    className="hover:text-white"
+  >
+    <Globe size={18} />
+  </a>
+
+
+</div>
+
           </div>
         </div>
 
         {/* BOTTOM */}
         <div className="flex flex-col sm:flex-row justify-between items-center mt-6 text-xs text-slate-400 gap-3">
-          <div className="flex gap-1">
-            <span>Created by</span>
-            <span className="text-white font-medium">Srishti</span>,
-            <span className="text-white font-medium">Utkarsh</span> &
-            <span className="text-white font-medium">Ankur</span>
-          </div>
+         <div className="flex gap-1 flex-wrap">
+  <span>Created by</span>
+
+  <a
+    href="https://www.linkedin.com/in/srishti-singh19/"
+    target="_blank"
+    rel="noreferrer"
+    className="text-white font-medium hover:underline"
+  >
+    Srishti
+  </a>
+  ,
+
+  <a
+    href="https://www.linkedin.com/in/utkarsh-pratap-460502251/"
+    target="_blank"
+    rel="noreferrer"
+    className="text-white font-medium hover:underline"
+  >
+    Utkarsh
+  </a>
+  &
+
+  <a
+    href="https://www.linkedin.com/in/ankur-singh-03ba44380/"
+    target="_blank"
+    rel="noreferrer"
+    className="text-white font-medium hover:underline"
+  >
+    Ankur
+  </a>
+</div>
+
 
           <div className="flex gap-4">
             <p>© {new Date().getFullYear()} IIITians Network.</p>
